@@ -1,7 +1,12 @@
-import csv
+import time
 
-with open("data/video_urls.csv", newline="") as file:
-    reader = csv.DictReader(file)
+start = time.perf_counter()
 
-    for row in reader:
-        print(row["title"], row["url"])
+# code to time goes here
+
+end = time.perf_counter()
+elapsed = end - start
+#Use round() to show the time with 2 decimal points:
+
+serial_time = round(elapsed, 2)
+print(f"Serial execution: {serial_time}")
