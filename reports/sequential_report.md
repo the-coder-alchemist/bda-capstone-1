@@ -14,4 +14,6 @@ Serial execution time: 9.71
 
 Parallel execution time: 7.87
 
+## Comparison
+
 Parallel is faster than serial

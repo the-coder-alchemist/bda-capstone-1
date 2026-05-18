@@ -1,5 +1,7 @@
 from library import download_video
 from library import read_video_urls
+from library import get_video_metadata
+import csv 
 import time 
 from multiprocessing import Pool
 
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     print(f"Total execution time: {total_time}")
     """
 
-
+    print("-" * 40)
     print(f"Starting parallel download of {len(video_url)} videos...")
 
     
@@ -54,3 +56,26 @@ if __name__ == "__main__":
     # Use round() to show the time with 2 decimal points
     parallel_time = round(parallel_elapsed, 2)
     print(f"Parallel execution: {parallel_time}")    
+
+    print()
+    print("-" * 40)
+    
+     # List to store all metadata
+    metadata_rows = []
+
+    for url in video_url:
+        
+        # Get metadata using the new function
+        metadata = get_video_metadata(url)
+        metadata_rows.append(metadata)
+
+    
+    with open("data/video_metadata.csv", "w", newline="", encoding="utf-8") as file:
+        fieldnames = ["title", "duration", "uploader", "view_count", "ext", "url"]
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        
+        writer.writeheader()
+        writer.writerows(metadata_rows)
+    
+    print(f" Metadata saved to: data/video_metadata.csv")
+    print(f" Total videos processed: {len(metadata_rows)}")        

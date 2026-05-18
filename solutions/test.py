@@ -1,12 +1,21 @@
-import time
+import yt_dlp
 
-start = time.perf_counter()
+urls = [
+    "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+]
 
-# code to time goes here
+ydl_options = {
+    "quiet": True,
+    "skip_download": True,
+}
 
-end = time.perf_counter()
-elapsed = end - start
-#Use round() to show the time with 2 decimal points:
+with yt_dlp.YoutubeDL(ydl_options) as ydl:
+    for url in urls:
+        info = ydl.extract_info(url, download=False)
 
-serial_time = round(elapsed, 2)
-print(f"Serial execution: {serial_time}")
+        print("Title:", info.get("title"))
+        print("Duration:", info.get("duration"))
+        print("Uploader:", info.get("uploader"))
+        print("Views:", info.get("view_count"))
+        print("Extension:", info.get("ext"))
+        print("URL:", url)
