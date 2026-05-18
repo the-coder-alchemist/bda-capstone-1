@@ -6,6 +6,6 @@ Total time: 0.0
 
 ## Complexity
 
-Time complexity:
+Time complexity: O(n)
 
-Space complexity:
+Space complexity: O(n)
