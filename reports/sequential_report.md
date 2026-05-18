@@ -2,7 +2,7 @@
 
 ## Serial Execution
 
-Total time: 0.0
+Serial execution time: 9.71
 
 ## Complexity
 
