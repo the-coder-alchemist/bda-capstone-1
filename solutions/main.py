@@ -7,3 +7,4 @@ if __name__ == "__main__":
     for url in video_url:
         download_video(url)
         time_counter()
+    time_counter()    
