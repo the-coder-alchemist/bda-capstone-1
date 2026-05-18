@@ -11,11 +11,26 @@ def download_video(url):
 
 # Save inside videos/ using the video title as the filename
     ydl_options = {
-        "outtmpl": "videos/%(title)s.%(ext)s"
+        "outtmpl": "videos/%(title)s.%(ext)s",
+        "socket_timeout": 30,
     }
+    try:
+        with yt_dlp.YoutubeDL(ydl_options) as ydl:
+            ydl.download([url])
 
-    with yt_dlp.YoutubeDL(ydl_options) as ydl:
-        ydl.download([url])
+        return {
+            "url": url,
+            "status": "success",
+            "error": "",
+        }
+
+    except Exception as error:
+        return {
+            "url": url,
+            "status": "failed",
+            "error": str(error),
+        }
+
 
 
 def read_video_urls(csv_path):

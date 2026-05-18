@@ -17,3 +17,8 @@ Parallel execution time: 7.87
 ## Comparison
 
 Parallel is faster than serial
+
+## Download status
+
+Successful downloads:5
+Failed downloads:0

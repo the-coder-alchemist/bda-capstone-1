@@ -45,9 +45,11 @@ if __name__ == "__main__":
     # Start timing for parallel execution
     parallel_start = time.perf_counter()
     
+
+    download_results = []    
     # Use multiprocessing.Pool to download videos in parallel
     with Pool() as pool:
-        pool.map(download_video, video_url)
+        download_results = pool.map(download_video, video_url)
     
     # End timing for parallel execution
     parallel_end = time.perf_counter()
@@ -60,6 +62,24 @@ if __name__ == "__main__":
     print()
     print("-" * 40)
     
+    
+    successful = []
+    failed = []
+    
+    for result in download_results:
+        if result["status"] == "success":
+            successful.append(result)
+            print(f"SUCCESS: {result['url']}")
+        else:
+            failed.append(result)
+            print(f"FAILED: {result['url']}")
+            print(f"Error: {result['error']}")
+    print()
+    print("-" * 40)
+    print(f"Successful downloads: {len(successful)}/{len(video_url)}")
+    print(f"Failed downloads: {len(failed)}/{len(video_url)}")
+    print()
+    print("-" * 40)
      # List to store all metadata
     metadata_rows = []
 
@@ -78,4 +98,7 @@ if __name__ == "__main__":
         writer.writerows(metadata_rows)
     
     print(f" Metadata saved to: data/video_metadata.csv")
-    print(f" Total videos processed: {len(metadata_rows)}")        
+    print(f" Total videos processed: {len(metadata_rows)}")     
+
+
+   
